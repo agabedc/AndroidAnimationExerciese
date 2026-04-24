@@ -22,14 +22,24 @@ fun Task1() {
     // Track whether the composable has been composed
     var isVisible by remember { mutableStateOf(false) }
 
+    LaunchedEffect(Unit) {
+        isVisible = true
+    }
+
+    val alpha by animateFloatAsState(
+        targetValue = if (isVisible) 1f else 0f,
+        animationSpec = tween(durationMillis = 5000),
+        label = "task1FadeInAlpha"
+    )
+
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "Hello Android",
+            text = "Hello Android!",
             fontSize = 24.sp,
-            // TODO add fade-in animation here
+            modifier = Modifier.alpha(alpha)
         )
     }
 }

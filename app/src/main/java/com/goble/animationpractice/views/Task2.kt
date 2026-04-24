@@ -2,7 +2,9 @@ package com.goble.animationpractice.views
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -43,11 +45,17 @@ fun Task2() {
             Text("Toggle")
         }
 
-        // TODO Use AnimatedVisibility and set a transition
-        //      into the screen and out of the screen
-        Box(
-            modifier = Modifier.background(color = Color.Red)
-        )
+        AnimatedVisibility(
+            visible = isVisible,
+            enter = fadeIn() + slideInHorizontally(),
+            exit = fadeOut() + slideOutHorizontally()
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(120.dp)
+                    .background(color = Color.Red)
+            )
+        }
     }
 }
 

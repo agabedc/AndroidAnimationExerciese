@@ -1,5 +1,5 @@
 [versions]
-agp = "8.13.2"
+agp = "9.0.1"
 confettikit = "0.8.0"
 konfettiCompose = "2.0.5"
 kotlin = "2.3.20"

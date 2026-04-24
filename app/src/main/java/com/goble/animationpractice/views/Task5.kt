@@ -30,6 +30,28 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun Task5() {
+    val infiniteTransition = rememberInfiniteTransition(label = "task5InfiniteTransition")
+
+    val circleColor by infiniteTransition.animateColor(
+        initialValue = Color.Blue,
+        targetValue = Color.Magenta,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 1000, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "task5CircleColor"
+    )
+
+    val textAlpha by infiniteTransition.animateFloat(
+        initialValue = 0.2f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 800, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "task5TextAlpha"
+    )
+
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -41,13 +63,15 @@ fun Task5() {
             Box(
                 modifier = Modifier.size(80.dp)
                     .clip(CircleShape)
-                    // TODO Add infinite transition between two colors
+                    .background(circleColor)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // TODO: Optional -- Add pulsing effect to text.alpha
-            Text("Loading...")
+            Text(
+                text = "Loading...",
+                modifier = Modifier.alpha(textAlpha)
+            )
         }
     }
 }
